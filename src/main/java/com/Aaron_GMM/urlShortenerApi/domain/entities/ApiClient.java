@@ -1,60 +1,73 @@
 package com.Aaron_GMM.urlShortenerApi.domain.entities;
+import com.Aaron_GMM.urlShortenerApi.domain.enums.ApiClientStatus;
+
 import java.util.Objects;
+import java.util.Set;
 
 public class ApiClient {
-    private  String id;
-    private  String shortCode;
-    private  String originalUrl;
-    private  String apiClienteID;
+    private String Id;
+    private String Name;
+    private String apiKeyHash;
+    private ApiClientStatus status;
+    private Set<String> roles;
 
-    public ApiClient(String id, String apiClienteID, String originalUrl, String shortCode) {
-        this.id = id;
-        this.apiClienteID = apiClienteID;
-        this.originalUrl = originalUrl;
-        this.shortCode = shortCode;
+    public ApiClient(String id, String name, String apiKeyHash, ApiClientStatus status, Set<String> roles) {
+        Id = id;
+        Name = name;
+        this.apiKeyHash = apiKeyHash;
+        this.status = status;
+        this.roles = roles;
     }
 
     public String getId() {
-        return id;
-    }
-
-    public String getShortCode() {
-        return shortCode;
-    }
-
-    public String getApiClienteID() {
-        return apiClienteID;
-    }
-
-    public String getOriginalUrl() {
-        return originalUrl;
+        return Id;
     }
 
     public void setId(String id) {
-        this.id = id;
+        Id = id;
     }
 
-    public void setShortCode(String shortCode) {
-        this.shortCode = shortCode;
+    public String getName() {
+        return Name;
     }
 
-    public void setOriginalUrl(String originalUrl) {
-        this.originalUrl = originalUrl;
+    public void setName(String name) {
+        Name = name;
     }
 
-    public void setApiClienteID(String apiClienteID) {
-        this.apiClienteID = apiClienteID;
+    public String getApiKeyHash() {
+        return apiKeyHash;
+    }
+
+    public void setApiKeyHash(String apiKeyHash) {
+        this.apiKeyHash = apiKeyHash;
+    }
+
+    public ApiClientStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(ApiClientStatus status) {
+        this.status = status;
+    }
+
+    public Set<String> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<String> roles) {
+        this.roles = roles;
     }
 
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         ApiClient apiClient = (ApiClient) o;
-        return Objects.equals(id, apiClient.id);
+        return Objects.equals(Id, apiClient.Id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(id);
+        return Objects.hashCode(Id);
     }
 }

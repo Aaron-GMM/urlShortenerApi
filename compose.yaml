@@ -1,9 +1,10 @@
 services:
   mongodb:
-    image: 'mongo:latest'
-    environment:
-      - 'MONGO_INITDB_DATABASE=mydatabase'
-      - 'MONGO_INITDB_ROOT_PASSWORD=secret'
-      - 'MONGO_INITDB_ROOT_USERNAME=root'
+    image: 'mongo:8.0'
+    container_name: 'mongodbUrlShotener'
     ports:
       - '27017'
+    environment:
+      - 'MONGO_INITDB_DATABASE=${database}'
+      - 'MONGO_INITDB_ROOT_PASSWORD=${password}'
+      - 'MONGO_INITDB_ROOT_USERNAME=${username}'
