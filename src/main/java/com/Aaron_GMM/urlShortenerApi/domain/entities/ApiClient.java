@@ -1,23 +1,30 @@
 package com.Aaron_GMM.urlShortenerApi.domain.entities;
+import com.Aaron_GMM.urlShortenerApi.domain.enums.ApiClientRole;
 import com.Aaron_GMM.urlShortenerApi.domain.enums.ApiClientStatus;
+import org.springframework.data.annotation.Id;
+
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Objects;
-import java.util.Set;
-
+@Document(collection = "ApiClients")
 public class ApiClient {
+    @Id
     private String Id;
     private String Name;
+    @Indexed(unique = true)
     private String apiKeyHash;
     private ApiClientStatus status;
-    private Set<String> roles;
+    private ApiClientRole roles;
 
-    public ApiClient(String id, String name, String apiKeyHash, ApiClientStatus status, Set<String> roles) {
+    public ApiClient(String id, String name, String apiKeyHash, ApiClientStatus status, ApiClientRole roles) {
         Id = id;
         Name = name;
         this.apiKeyHash = apiKeyHash;
         this.status = status;
         this.roles = roles;
     }
+    public ApiClient(){}
 
     public String getId() {
         return Id;
@@ -51,11 +58,11 @@ public class ApiClient {
         this.status = status;
     }
 
-    public Set<String> getRoles() {
+    public ApiClientRole getRoles() {
         return roles;
     }
 
-    public void setRoles(Set<String> roles) {
+    public void setRoles(ApiClientRole roles) {
         this.roles = roles;
     }
 
