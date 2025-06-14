@@ -34,9 +34,7 @@ public class ApiKeyAuthFilter extends OncePerRequestFilter {
             filterChain.doFilter(request, response); // Deixa outros filtros lidarem ou falha
             return;
         }
-
-        // Supondo que ApiClient tenha um campo 'clientId' que é único e indexado
-        ApiClient apiClient = apiClientRepository.findByClientId(clientId).orElse(null);
+        ApiClient apiClient = apiClientRepository.findById(clientId).orElse(null);
 
         if (apiClient != null &&
                 apiClient.getStatus() == ApiClientStatus.ACTIVE &&
