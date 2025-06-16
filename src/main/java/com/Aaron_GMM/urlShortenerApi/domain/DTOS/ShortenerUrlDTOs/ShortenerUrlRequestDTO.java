@@ -3,15 +3,12 @@ package com.Aaron_GMM.urlShortenerApi.domain.DTOS.ShortenerUrlDTOs;
 import org.springframework.data.mongodb.core.index.Indexed;
 
 public class ShortenerUrlRequestDTO {
-    @Id
-    private  String Id;
 
     private  String shortCode;
     private  String originalUrl;
     private  String apiClienteID;
 
-    public ShortenerUrlRequestDTO(String id, String apiClienteID, String originalUrl, String shortCode) {
-        this.Id = id;
+    public ShortenerUrlRequestDTO( String apiClienteID, String originalUrl, String shortCode) {
         this.apiClienteID = apiClienteID;
         this.originalUrl = originalUrl;
         this.shortCode = shortCode;
@@ -19,9 +16,6 @@ public class ShortenerUrlRequestDTO {
     public ShortenerUrlRequestDTO(){}
 
 
-    public String getId() {
-        return Id;
-    }
 
     public String getShortCode() {
         return shortCode;
@@ -35,9 +29,6 @@ public class ShortenerUrlRequestDTO {
         return originalUrl;
     }
 
-    public void setId(String id) {
-        this.Id = id;
-    }
 
     public void setShortCode(String shortCode) {
         this.shortCode = shortCode;

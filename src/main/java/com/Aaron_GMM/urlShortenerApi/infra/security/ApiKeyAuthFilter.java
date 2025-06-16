@@ -38,29 +38,25 @@ public class ApiKeyAuthFilter extends OncePerRequestFilter {
 
         if (apiClient != null &&
                 apiClient.getStatus() == ApiClientStatus.ACTIVE &&
-                // (Opcional) Verifique a data de validade se você implementou 'validUntil'
-                // (apiClient.getValidUntil() == null || LocalDateTime.now().isBefore(apiClient.getValidUntil())) &&
+
                 passwordEncoder.matches(apiSecret, apiClient.getApiKeyHash())) {
 
-            // Autenticado com sucesso!
-            // O "principal" pode ser o ID do cliente ou o objeto ApiClient
-            // As "authorities" podem vir dos roles do ApiClient, se houver
+
             UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                     apiClient.getId(), // ou apiClient objeto
                     null, // Credenciais não são mais necessárias aqui
                     Collections.emptyList() // ou authorities derivadas dos roles do apiClient
             );
             SecurityContextHolder.getContext().setAuthentication(authentication);
+            filterChain.doFilter(request, response);
+
         } else {
-            // Falha na autenticação - você pode limpar o contexto ou tratar o erro aqui,
-            // mas geralmente se nenhum 'Authentication' é setado, o acesso será negado
-            // mais tarde por regras de autorização ou por um 'AuthenticationEntryPoint'.
             SecurityContextHolder.clearContext();
-            // response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "API Key inválida ou não autorizada");
-            // return; // Se quiser interromper a cadeia aqui em caso de falha
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            response.getWriter().write("API Key or Secret is invalid.");
+            return; // IMPORTANTE: Interrompe a execução aqui.
         }
 
-        filterChain.doFilter(request, response);
     }
 }
 
