@@ -2,7 +2,6 @@ package com.Aaron_GMM.urlShortenerApi.domain.DTOS.ShortenerUrlDTOs;
 
 public class ShortenerUrlResponseDTO {
 
-    @Id
     private  String Id;
 
     private  String shortCode;

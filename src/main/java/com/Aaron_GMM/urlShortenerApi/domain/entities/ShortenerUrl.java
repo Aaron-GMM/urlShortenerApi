@@ -5,7 +5,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.Objects;
 @Document(collection = "shortened_Url")
 public class ShortenerUrl {
-    @Id
+
     private  String Id;
 
     @Indexed(unique = true)
