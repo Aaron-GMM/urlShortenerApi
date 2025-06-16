@@ -1,25 +1,23 @@
-package com.Aaron_GMM.urlShortenerApi.domain.entities;
-import org.springframework.data.mongodb.core.index.Indexed;
-import org.springframework.data.mongodb.core.mapping.Document;
+package com.Aaron_GMM.urlShortenerApi.domain.DTOS.ShortenerUrlDTOs;
 
-import java.util.Objects;
-@Document(collection = "shortened_Url")
-public class ShortenerUrl {
+import org.springframework.data.mongodb.core.index.Indexed;
+
+public class ShortenerUrlRequestDTO {
     @Id
     private  String Id;
 
-    @Indexed(unique = true)
     private  String shortCode;
     private  String originalUrl;
     private  String apiClienteID;
 
-    public ShortenerUrl(String id, String apiClienteID, String originalUrl, String shortCode) {
+    public ShortenerUrlRequestDTO(String id, String apiClienteID, String originalUrl, String shortCode) {
         this.Id = id;
         this.apiClienteID = apiClienteID;
         this.originalUrl = originalUrl;
         this.shortCode = shortCode;
     }
-    public ShortenerUrl(){}
+    public ShortenerUrlRequestDTO(){}
+
 
     public String getId() {
         return Id;
@@ -53,15 +51,4 @@ public class ShortenerUrl {
         this.apiClienteID = apiClienteID;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-        ShortenerUrl that = (ShortenerUrl) o;
-        return Objects.equals(Id, that.Id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(Id);
-    }
 }
